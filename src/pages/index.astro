@@ -20,13 +20,10 @@ const { email, phone } = basics;
       class="container mx-auto py-4 flex justify-between items-center px-8 max-w-[900px]"
     >
       <!-- Logo -->
-      <a href="#section1" id="nav-logo" class="group flex items-center gap-3">
+      <a href="#section1" id="nav-logo" class="group flex items-center gap-3 transition-transform duration-700 ease-out hover:scale-110 hover:rotate-2 will-change-transform">
         <div class="relative" style="filter:drop-shadow(var(--logo-glow));transition:filter 0.5s">
           <div class="absolute -inset-2 bg-gradient-to-r from-cyan-600 to-blue-600 rounded-lg blur opacity-0 group-hover:opacity-40 transition-all duration-500" style="filter:drop-shadow(var(--logo-glow-hover))"></div>
-          <div class="relative flex flex-col leading-none">
-            <span class="text-2xl font-black tracking-tighter text-white">IAM</span>
-            <span class="text-[10px] uppercase font-bold tracking-[0.3em] text-cyan-400">Jaguer</span>
-          </div>
+          <img src={basics.image} alt={basics.name} class="relative w-10 h-10 sm:w-12 sm:h-12 object-contain" />
         </div>
       </a>
 
