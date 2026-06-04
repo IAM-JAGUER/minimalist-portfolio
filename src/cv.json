@@ -87,7 +87,7 @@
     },
     {
       "name": "LingoCraft",
-      "url": "https://github.com/IAM-DEV88/lexigo",
+      "url": "https://lingoracft.netlify.app/",
       "description": "Plataforma multi-tenant de aprendizaje de idiomas con gamificación (XP, rachas, logros), suscripciones PayPal, roles (student/moderator/admin), tutorías con Cal.com, y contenido estructurado en cursos/lecciones.",
       "highlights": [
         "React",
@@ -132,7 +132,7 @@
     },
     {
       "name": "Grupo GM",
-      "url": "https://github.com/IAM-DEV88/grupogm",
+      "url": "https://grupogm.netlify.app/",
       "description": "Dashboard empresarial multi-tenant con autenticación por empresa, gestión de empleados, contratos, auditoría, módulo Ecotech para monitoreo de pinos, y gráficos interactivos con Recharts.",
       "highlights": [
         "Next.js",
