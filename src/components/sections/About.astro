@@ -27,8 +27,8 @@ const tags = Array.from(new Set(projects.flatMap((p) => p.highlights)));
     </div>
 
     <!-- Banner para la animación de lluvia de palabras -->
-    <div class="word-rain-banner mask-fade-y border-t border-b border-white/5 py-8">
-      {tags.map((tag) => <span class="falling-word text-cyan-400 font-black uppercase tracking-[0.2em] pointer-events-none drop-shadow-[0_0_10px_rgba(6,182,212,0.4)]">{tag}</span>)}
+    <div class="word-rain-banner mask-fade-y border-t border-b border-white/5">
+      {tags.map((tag) => <span class="falling-word text-cyan-400 font-black uppercase tracking-[0.2em] pointer-events-none">{tag}</span>)}
     </div>
   </div>
 </Section>
@@ -37,37 +37,42 @@ const tags = Array.from(new Set(projects.flatMap((p) => p.highlights)));
   .word-rain-banner {
     position: relative;
     width: 100%;
-    height: 120px;
+    height: 140px;
     overflow: hidden;
   }
 
   .mask-fade-y {
-    mask-image: linear-gradient(to bottom, transparent, black 20%, black 80%, transparent);
+    mask-image: linear-gradient(to bottom, transparent, black 15%, black 85%, transparent);
+    -webkit-mask-image: linear-gradient(to bottom, transparent, black 15%, black 85%, transparent);
   }
 
   .falling-word {
     position: absolute;
+    top: 0;
+    left: 0;
     font-size: 0.85rem;
     animation: fall 15s linear infinite;
+    animation-fill-mode: backwards;
     opacity: 0;
     white-space: nowrap;
+    will-change: transform, opacity;
   }
 
   @keyframes fall {
     0% {
-      transform: translateY(-50px) scale(0.8);
+      transform: translateY(-60px) scale(0.8);
       opacity: 0;
     }
-    20% {
-      opacity: 0.6;
-      transform: translateY(20px) scale(1.1);
+    15% {
+      opacity: 0.7;
+      transform: translateY(10px) scale(1.1);
     }
-    80% {
-      opacity: 0.6;
-      transform: translateY(100px) scale(1.1);
+    85% {
+      opacity: 0.7;
+      transform: translateY(110px) scale(1.1);
     }
     100% {
-      transform: translateY(180px) scale(0.8);
+      transform: translateY(200px) scale(0.8);
       opacity: 0;
     }
   }
@@ -78,17 +83,17 @@ const tags = Array.from(new Set(projects.flatMap((p) => p.highlights)));
     const words = document.querySelectorAll(".falling-word");
 
     words.forEach((word) => {
-      const htmlWord = word as HTMLElement;
+      const el = word;
       const delay = Math.random() * 15;
       const leftPosition = Math.random() * 90 + 5;
       const size = 0.7 + Math.random() * 0.6;
       const colors = ['#06b6d4', '#3b82f6', '#f59e0b', '#ffffff'];
       const randomColor = colors[Math.floor(Math.random() * colors.length)];
 
-      htmlWord.style.animationDelay = `${delay}s`;
-      htmlWord.style.left = `${leftPosition}%`;
-      htmlWord.style.fontSize = `${size}rem`;
-      htmlWord.style.color = randomColor;
+      el.style.animationDelay = `${delay}s`;
+      el.style.left = `${leftPosition}%`;
+      el.style.fontSize = `${size}rem`;
+      el.style.color = randomColor;
     });
   });
 </script>
