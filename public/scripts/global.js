@@ -10,49 +10,91 @@ document.addEventListener("DOMContentLoaded", function () {
     const navIndicator = document.getElementById("nav-indicator");
     const navLinks = document.querySelectorAll(".nav-link");
 
-    // Función para actualizar el indicador de la navbar
-    const updateNavIndicator = () => {
-      let currentSectionId = "";
-      
-      sections.forEach((section) => {
-        const sectionTop = section.offsetTop;
-        if (window.scrollY >= sectionTop - 200) {
-          currentSectionId = section.getAttribute("id");
-        }
-      });
+    let sectionRects = [];
+    let navLinkRects = [];
 
-      if (currentSectionId) {
-        const activeLink = document.querySelector(`.nav-link[href="#${currentSectionId}"]`);
-        if (activeLink && navIndicator) {
-          navIndicator.style.width = `${activeLink.offsetWidth}px`;
-          navIndicator.style.left = `${activeLink.offsetLeft}px`;
+    function cacheLayout() {
+      sectionRects = Array.from(sections).map(s => ({
+        id: s.getAttribute("id"),
+        top: s.offsetTop
+      })).sort((a, b) => a.top - b.top);
+
+      navLinkRects = Array.from(navLinks).map(l => ({
+        el: l,
+        href: l.getAttribute("href"),
+        width: l.offsetWidth,
+        left: l.offsetLeft
+      }));
+    }
+
+    function getCurrentSectionId(scrollY) {
+      let id = "";
+      for (const s of sectionRects) {
+        if (scrollY >= s.top - 200) id = s.id;
+      }
+      return id;
+    }
+
+    function updateNavIndicator(scrollY) {
+      const currentSectionId = getCurrentSectionId(scrollY);
+
+      if (currentSectionId && navIndicator) {
+        const targetHref = "#" + currentSectionId;
+        const linkRect = navLinkRects.find(r => r.href === targetHref);
+        if (linkRect) {
+          navIndicator.style.width = linkRect.width + "px";
+          navIndicator.style.left = linkRect.left + "px";
           navIndicator.style.opacity = "1";
-          
-          // Actualizar clases de texto
+
           navLinks.forEach(link => {
             link.classList.remove("text-cyan-400", "scale-110");
             link.classList.add("text-gray-400");
           });
-          activeLink.classList.add("text-cyan-400", "scale-110");
-          activeLink.classList.remove("text-gray-400");
+          linkRect.el.classList.add("text-cyan-400", "scale-110");
+          linkRect.el.classList.remove("text-gray-400");
         }
       } else if (navIndicator) {
         navIndicator.style.opacity = "0";
       }
-    };
+    }
+
+    function updateNavigation(scrollY) {
+      navContainer?.classList.remove("opacity-0", "translate-y-4", "pointer-events-none");
+      navContainer?.classList.add("opacity-100", "translate-y-0", "pointer-events-auto");
+
+      if (scrollY < 100) {
+        scrollUpBtn?.classList.add("opacity-0", "pointer-events-none", "scale-90");
+        scrollUpBtn?.classList.remove("opacity-100", "pointer-events-auto", "scale-100");
+      } else {
+        scrollUpBtn?.classList.remove("opacity-0", "pointer-events-none", "scale-90");
+        scrollUpBtn?.classList.add("opacity-100", "pointer-events-auto", "scale-100");
+      }
+
+      const lastSection = sectionRects[sectionRects.length - 1];
+      const isAtBottom = (window.innerHeight + scrollY) >= (document.documentElement.scrollHeight - 100);
+      const isInLastSection = lastSection && scrollY >= lastSection.top - 300;
+
+      if (isAtBottom || isInLastSection) {
+        scrollDownBtn?.classList.add("opacity-0", "pointer-events-none", "scale-90");
+        scrollDownBtn?.classList.remove("opacity-100", "pointer-events-auto", "scale-100");
+      } else {
+        scrollDownBtn?.classList.remove("opacity-0", "pointer-events-none", "scale-90");
+        scrollDownBtn?.classList.add("opacity-100", "pointer-events-auto", "scale-100");
+      }
+
+      updateNavIndicator(scrollY);
+    }
 
     menuToggle?.addEventListener("click", function () {
       menuMobile?.classList.toggle("active");
     });
 
-    // Agregar event listener a cada elemento del menú móvil
     mobileMenuItems.forEach((item) => {
       item.addEventListener("click", function () {
         menuMobile?.classList.remove("active");
       });
     });
 
-    // Intersection Observer para manejar animaciones al entrar en la vista
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
@@ -63,90 +105,40 @@ document.addEventListener("DOMContentLoaded", function () {
           }
         });
       },
-      {
-        threshold: 0.2,
-      }
+      { threshold: 0.2 }
     );
 
     sections.forEach((section) => {
       observer.observe(section);
     });
 
-    const handleScroll = () => {
-      const currentScroll = window.scrollY;
-      const sortedSections = getSortedSections();
-      
-      // Mostrar el contenedor siempre
-      navContainer?.classList.remove("opacity-0", "translate-y-4", "pointer-events-none");
-      navContainer?.classList.add("opacity-100", "translate-y-0", "pointer-events-auto");
-
-      // Lógica para ocultar botón UP solo en la primera sección (Hero)
-      if (currentScroll < 100) {
-        scrollUpBtn?.classList.add("opacity-0", "pointer-events-none", "scale-90");
-        scrollUpBtn?.classList.remove("opacity-100", "pointer-events-auto", "scale-100");
-      } else {
-        scrollUpBtn?.classList.remove("opacity-0", "pointer-events-none", "scale-90");
-        scrollUpBtn?.classList.add("opacity-100", "pointer-events-auto", "scale-100");
-      }
-
-      // Lógica para ocultar botón DOWN solo cuando no hay más secciones a las que bajar
-      const lastSection = sortedSections[sortedSections.length - 1];
-      const isAtBottom = (window.innerHeight + window.scrollY) >= (document.documentElement.scrollHeight - 100);
-      const isInLastSection = lastSection && currentScroll >= lastSection.offsetTop - 300;
-
-      if (isAtBottom || isInLastSection) {
-        scrollDownBtn?.classList.add("opacity-0", "pointer-events-none", "scale-90");
-        scrollDownBtn?.classList.remove("opacity-100", "pointer-events-auto", "scale-100");
-      } else {
-        scrollDownBtn?.classList.remove("opacity-0", "pointer-events-none", "scale-90");
-        scrollDownBtn?.classList.add("opacity-100", "pointer-events-auto", "scale-100");
-      }
-
-      updateNavIndicator();
-    };
-
     var _scrollRaf = null;
     window.addEventListener("scroll", function() {
       if (_scrollRaf) return;
       _scrollRaf = requestAnimationFrame(function() {
         _scrollRaf = null;
-        handleScroll();
+        updateNavigation(window.scrollY);
       });
     });
-    window.addEventListener("resize", updateNavIndicator);
-    // Ejecutar una vez al inicio para establecer estado correcto
-    handleScroll();
 
-    function getSortedSections() {
-      return Array.from(sections).sort((a, b) => a.offsetTop - b.offsetTop);
-    }
+    window.addEventListener("resize", cacheLayout);
+    cacheLayout();
+    updateNavigation(window.scrollY);
 
     scrollUpBtn?.addEventListener("click", () => {
-      const currentScroll = window.scrollY;
-      const sortedSections = getSortedSections();
-      
-      // Encontrar la sección anterior (la primera que esté por encima del scroll actual)
-      const prevSection = [...sortedSections]
+      const scrollY = window.scrollY;
+      const prevSection = [...sectionRects]
         .reverse()
-        .find(section => section.offsetTop < currentScroll - 50);
-
-      if (prevSection) {
-        window.scrollTo({ top: prevSection.offsetTop, behavior: "smooth" });
-      } else {
-        window.scrollTo({ top: 0, behavior: "smooth" });
-      }
+        .find(s => s.top < scrollY - 50);
+      window.scrollTo({ top: prevSection ? prevSection.top : 0, behavior: "smooth" });
     });
 
     scrollDownBtn?.addEventListener("click", () => {
-      const currentScroll = window.scrollY;
-      const sortedSections = getSortedSections();
-      
-      // Encontrar la siguiente sección (la primera que esté por debajo del scroll actual)
-      const nextSection = sortedSections
-        .find(section => section.offsetTop > currentScroll + 50);
-
+      const scrollY = window.scrollY;
+      const nextSection = sectionRects
+        .find(s => s.top > scrollY + 50);
       if (nextSection) {
-        window.scrollTo({ top: nextSection.offsetTop, behavior: "smooth" });
+        window.scrollTo({ top: nextSection.top, behavior: "smooth" });
       }
     });
   });

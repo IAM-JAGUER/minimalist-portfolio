@@ -10,12 +10,12 @@ import { getRole, roleClass, techColor } from "@/lib/shared.js";
     <span id="project-counter" class="shrink-0 text-[10px] font-bold text-slate-500 bg-slate-800/50 px-2.5 py-1.5 rounded-lg border border-slate-700 whitespace-nowrap" data-i18n="search.counter" data-total={projects.length}>{projects.length} proyectos</span>
     <div class="relative flex-1">
       <input id="search-input" list="projectNames" placeholder="Buscar proyecto..."
-        class="w-full bg-slate-800/80 border border-slate-700 text-white text-sm rounded-xl px-4 py-3 focus:outline-none focus:border-cyan-500 transition-all placeholder:text-slate-500 font-medium"
+        class="w-full bg-slate-800/80 border border-slate-700 text-white text-sm rounded-xl px-4 py-3 focus:outline-none focus:border-cyan-500 placeholder:text-slate-500 font-medium"
         data-i18n-placeholder="search.placeholder"
       />
       <svg class="absolute inset-y-0 right-3 my-auto w-4 h-4 text-slate-500 pointer-events-none" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
     </div>
-    <button id="clear-search" class="shrink-0 text-[10px] font-semibold px-2.5 py-1.5 rounded-lg border border-slate-700 text-slate-500 hover:text-white hover:border-slate-500 transition-all bg-slate-800/50 hidden" data-i18n="search.clear">Limpiar</button>
+    <button id="clear-search" class="shrink-0 text-[10px] font-semibold px-2.5 py-1.5 rounded-lg border border-slate-700 text-slate-500 hover:text-white hover:border-slate-500 bg-slate-800/50 hidden" data-i18n="search.clear">Limpiar</button>
   </div>
   <div class="flex flex-wrap gap-1.5 no-print" id="quick-filters"></div>
 
@@ -30,7 +30,7 @@ import { getRole, roleClass, techColor } from "@/lib/shared.js";
       const deployed = url.includes(".netlify.app") || url.includes(".vercel.app") || url.includes(".github.io");
       const gh = url.includes("github.com") ? url : "";
       return (
-        <div class="project-card group relative bg-slate-800/60 border border-slate-700/80 rounded-2xl p-5 hover:-translate-y-0.5 hover:border-cyan-500 transition-all duration-300 flex flex-col gap-3"
+        <div class="project-card group relative bg-slate-800/60 border border-slate-700/80 rounded-2xl p-5 hover:-translate-y-0.5 hover:border-cyan-500 transition-transform duration-300 will-change-transform flex flex-col gap-3"
           data-project-name={p.name}
           data-techs={p.highlights.join(",")}
         >
@@ -40,8 +40,8 @@ import { getRole, roleClass, techColor } from "@/lib/shared.js";
               <span class="inline-block mt-1.5 text-[10px] font-semibold uppercase tracking-wider px-2 py-0.5 rounded-md border {roleClass(role)}">{role}</span>
             </div>
             <div class="flex gap-1.5 shrink-0 mt-1">
-              {deployed && <a href={url} target="_blank" class="project-link p-2 rounded-xl bg-slate-700/80 border border-slate-600 text-slate-400 hover:text-cyan-300 hover:bg-slate-600 hover:border-cyan-500 transition-all" data-i18n-title="link.live" title="Sitio en vivo"><svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg></a>}
-              {gh && <a href={gh} target="_blank" class="project-link p-2 rounded-xl bg-slate-700/80 border border-slate-600 text-slate-400 hover:text-white hover:bg-slate-600 transition-all" data-i18n-title="link.source" title="Código fuente"><svg class="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg></a>}
+              {deployed && <a href={url} target="_blank" class="project-link p-2 rounded-xl bg-slate-700/80 border border-slate-600 text-slate-400 hover:text-cyan-300 hover:bg-slate-600 hover:border-cyan-500" data-i18n-title="link.live" title="Sitio en vivo"><svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg></a>}
+              {gh && <a href={gh} target="_blank" class="project-link p-2 rounded-xl bg-slate-700/80 border border-slate-600 text-slate-400 hover:text-white hover:bg-slate-600" data-i18n-title="link.source" title="Código fuente"><svg class="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg></a>}
             </div>
           </div>
           <p class="relative text-sm text-slate-300 leading-relaxed line-clamp-3">{p.description}</p>
@@ -128,12 +128,12 @@ function init() {
       var p = filtered[i], url = (p.url||"").trim(), role = getRole(p);
       var deployed = url.includes(".netlify.app")||url.includes(".vercel.app")||url.includes(".github.io");
       var gh = url.includes("github.com")?url:"";
-      html += '<div class="project-card group relative bg-slate-800/60 border border-slate-700/80 rounded-2xl p-5 hover:-translate-y-0.5 hover:border-cyan-500 transition-all duration-300 flex flex-col gap-3" data-project-name="'+p.name+'">';
+      html += '<div class="project-card group relative bg-slate-800/60 border border-slate-700/80 rounded-2xl p-5 hover:-translate-y-0.5 hover:border-cyan-500 transition-transform duration-300 will-change-transform flex flex-col gap-3" data-project-name="'+p.name+'">';
       html += '<div class="relative flex items-start justify-between gap-3"><div class="min-w-0 flex-1"><h3 class="text-base font-bold text-white group-hover:text-white transition-colors">'+p.name+'</h3>';
       html += '<span class="inline-block mt-1.5 text-[10px] font-semibold uppercase tracking-wider px-2 py-0.5 rounded-md border '+roleClass(role)+'">'+role+'</span></div>';
       html += '<div class="flex gap-1.5 shrink-0 mt-1">';
-      if (deployed) html += '<a href="'+url+'" target="_blank" class="project-link p-2 rounded-xl bg-slate-700/80 border border-slate-600 text-slate-400 hover:text-cyan-300 hover:bg-slate-600 hover:border-cyan-500 transition-all" title="Live site"><svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg></a>';
-      if (gh) html += '<a href="'+gh+'" target="_blank" class="project-link p-2 rounded-xl bg-slate-700/80 border border-slate-600 text-slate-400 hover:text-white hover:bg-slate-600 transition-all" title="Source code"><svg class="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg></a>';
+      if (deployed) html += '<a href="'+url+'" target="_blank" class="project-link p-2 rounded-xl bg-slate-700/80 border border-slate-600 text-slate-400 hover:text-cyan-300 hover:bg-slate-600 hover:border-cyan-500" title="Live site"><svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg></a>';
+      if (gh) html += '<a href="'+gh+'" target="_blank" class="project-link p-2 rounded-xl bg-slate-700/80 border border-slate-600 text-slate-400 hover:text-white hover:bg-slate-600" title="Source code"><svg class="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg></a>';
       html += '</div></div><p class="relative text-sm text-slate-300 leading-relaxed line-clamp-3">'+p.description+'</p>';
       html += '<div class="relative flex flex-wrap gap-1.5 mt-auto pt-1">';
       for (var j = 0; j < p.highlights.length; j++) html += '<span class="text-[10px] font-semibold px-2 py-0.5 rounded-md border '+techColor(p.highlights[j])+'">'+p.highlights[j]+'</span>';
@@ -147,7 +147,7 @@ function init() {
     for (var i = 0; i < tags.length; i++) {
       (function(t) {
         var btn = document.createElement("button");
-        btn.className = "tech-filter text-[10px] font-semibold px-2.5 py-1.5 rounded-lg border border-slate-700 text-slate-400 hover:text-white hover:border-slate-500 transition-all bg-slate-800/50";
+        btn.className = "tech-filter text-[10px] font-semibold px-2.5 py-1.5 rounded-lg border border-slate-700 text-slate-400 hover:text-white hover:border-slate-500 bg-slate-800/50";
         btn.textContent = t;
         btn.addEventListener("click", function() {
           btn.classList.toggle("active"); btn.classList.toggle("bg-cyan-600/20"); btn.classList.toggle("border-cyan-500/40"); btn.classList.toggle("text-cyan-300");

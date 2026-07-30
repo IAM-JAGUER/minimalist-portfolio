@@ -25,7 +25,7 @@ const SOCIAL_ICONS: Record<string, any> = {
 
 ---
 <Section id="section1">
-  <div id="hero-content" class="flex flex-col items-center pb-12 opacity-0 translate-y-8 transition-all duration-1000 ease-out print:opacity-100 print:transform-none print:justify-center print:min-h-screen">
+  <div id="hero-content" class="flex flex-col items-center pb-12 opacity-0 translate-y-8 transition-all duration-1000 ease-out print:opacity-100 print:transform-none print:justify-center print:min-h-screen" style="will-change:transform,opacity">
     <div class="relative group print:hidden">
      
       
@@ -83,58 +83,58 @@ const SOCIAL_ICONS: Record<string, any> = {
       <div class="flex flex-row flex-wrap justify-center gap-3 mt-6 no-print">
         {
           email && (
-            <a
-              class="group relative p-4 bg-white/5 hover:bg-white/10 border border-white/10 rounded-[1.5rem] transition-all duration-300 hover:-translate-y-2 shadow-xl hover:shadow-cyan-500/20"
-              href={`mailto:${email}`}
-              data-i18n-title="email.tooltip"
-              title={`Enviar correo electronico a ${name}`}
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <Mail />
-              <span class="absolute -top-14 left-1/2 -translate-x-1/2 scale-0 group-hover:scale-100 transition-all duration-200 bg-slate-900/95 backdrop-blur-md text-white text-[11px] font-bold py-2 px-4 rounded-xl border border-white/20 shadow-2xl z-50 pointer-events-none whitespace-nowrap" data-i18n="email.tooltip">
-                Email
-              </span>
-            </a>
-          )
-        }
-        {
-          phone && (
-            <a
-              class="group relative p-4 bg-white/5 hover:bg-white/10 border border-white/10 rounded-[1.5rem] transition-all duration-300 hover:-translate-y-2 shadow-xl hover:shadow-cyan-500/20"
-              href={`tel:${phone}`}
-              data-i18n-title="phone.tooltip"
-              title={`Llamar a ${name}`}
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <Phone />
-              <span class="absolute -top-14 left-1/2 -translate-x-1/2 scale-0 group-hover:scale-100 transition-all duration-200 bg-slate-900/95 backdrop-blur-md text-white text-[11px] font-bold py-2 px-4 rounded-xl border border-white/20 shadow-2xl z-50 pointer-events-none whitespace-nowrap" data-i18n="phone.tooltip">
-                Teléfono
-              </span>
-            </a>
-          )
-        }
-        {
-          profiles
-            .filter(({ network }) => SOCIAL_ICONS[network])
-            .map(({ network, url }) => {
-              const Icon = SOCIAL_ICONS[network];
-              return (
-                <a
-                  class="group relative p-4 bg-white/5 hover:bg-white/10 border border-white/10 rounded-[1.5rem] transition-all duration-300 hover:-translate-y-2 shadow-xl hover:shadow-cyan-500/20"
-                  href={`${url}`}
-                  title={`Perfil de ${network}`}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  <Icon />
-                  <span class="absolute -top-14 left-1/2 -translate-x-1/2 scale-0 group-hover:scale-100 transition-all duration-200 bg-slate-900/95 backdrop-blur-md text-white text-[11px] font-bold py-2 px-4 rounded-xl border border-white/20 shadow-2xl z-50 pointer-events-none whitespace-nowrap">
-                    {network}
-                  </span>
-                </a>
-              );
-            })
+              <a
+                class="group relative p-4 bg-white/5 hover:bg-white/10 border border-white/10 rounded-[1.5rem] transition-transform duration-300 hover:-translate-y-2 will-change-transform shadow-xl hover:shadow-cyan-500/20"
+                href={`mailto:${email}`}
+                data-i18n-title="email.tooltip"
+                title={`Enviar correo electronico a ${name}`}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <Mail />
+                <span class="absolute -top-14 left-1/2 -translate-x-1/2 scale-0 group-hover:scale-100 transition-transform duration-200 bg-slate-900/95 backdrop-blur-md text-white text-[11px] font-bold py-2 px-4 rounded-xl border border-white/20 shadow-2xl z-50 pointer-events-none whitespace-nowrap" data-i18n="email.tooltip">
+                  Email
+                </span>
+              </a>
+            )
+          }
+          {
+            phone && (
+              <a
+                class="group relative p-4 bg-white/5 hover:bg-white/10 border border-white/10 rounded-[1.5rem] transition-transform duration-300 hover:-translate-y-2 will-change-transform shadow-xl hover:shadow-cyan-500/20"
+                href={`tel:${phone}`}
+                data-i18n-title="phone.tooltip"
+                title={`Llamar a ${name}`}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <Phone />
+                <span class="absolute -top-14 left-1/2 -translate-x-1/2 scale-0 group-hover:scale-100 transition-transform duration-200 bg-slate-900/95 backdrop-blur-md text-white text-[11px] font-bold py-2 px-4 rounded-xl border border-white/20 shadow-2xl z-50 pointer-events-none whitespace-nowrap" data-i18n="phone.tooltip">
+                  Teléfono
+                </span>
+              </a>
+            )
+          }
+          {
+            profiles
+              .filter(({ network }) => SOCIAL_ICONS[network])
+              .map(({ network, url }) => {
+                const Icon = SOCIAL_ICONS[network];
+                return (
+                  <a
+                    class="group relative p-4 bg-white/5 hover:bg-white/10 border border-white/10 rounded-[1.5rem] transition-transform duration-300 hover:-translate-y-2 will-change-transform shadow-xl hover:shadow-cyan-500/20"
+                    href={`${url}`}
+                    title={`Perfil de ${network}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <Icon />
+                    <span class="absolute -top-14 left-1/2 -translate-x-1/2 scale-0 group-hover:scale-100 transition-transform duration-200 bg-slate-900/95 backdrop-blur-md text-white text-[11px] font-bold py-2 px-4 rounded-xl border border-white/20 shadow-2xl z-50 pointer-events-none whitespace-nowrap">
+                      {network}
+                    </span>
+                  </a>
+                );
+              })
         }
       </div>
     </div>

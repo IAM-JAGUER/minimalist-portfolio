@@ -71,14 +71,14 @@ const SOCIAL_ICONS: Record<string, any> = {
       {
         email && (
           <a
-            class="group relative flex flex-col items-center gap-4 p-6 bg-white/5 border border-white/10 rounded-3xl hover:bg-white/10 hover:border-cyan-500 transition-all duration-300 hover:-translate-y-1 shadow-xl hover:shadow-cyan-500/10"
+            class="group relative flex flex-col items-center gap-4 p-6 bg-white/5 border border-white/10 rounded-3xl hover:bg-white/10 hover:border-cyan-500 transition-transform duration-300 hover:-translate-y-1 will-change-transform shadow-xl hover:shadow-cyan-500/10"
             href={`mailto:${email}`}
             data-i18n-title="email.tooltip"
             title={`Enviar correo electronico a ${name}`}
             target="_blank"
             rel="noopener noreferrer"
           >
-            <div class="p-3 bg-cyan-500/10 rounded-2xl group-hover:scale-110 transition-transform duration-300">
+            <div class="p-3 bg-cyan-500/10 rounded-2xl group-hover:scale-110 transition-transform duration-300 will-change-transform">
               <Mail />
             </div>
             <span class="text-[10px] font-black uppercase tracking-[0.2em] text-gray-500 group-hover:text-cyan-400 transition-colors" data-i18n="contact.email">Correo</span>
@@ -88,7 +88,7 @@ const SOCIAL_ICONS: Record<string, any> = {
       {
         phone && (
           <a
-            class="group relative flex flex-col items-center gap-4 p-6 bg-white/5 border border-white/10 rounded-3xl hover:bg-white/10 hover:border-cyan-500 transition-all duration-300 hover:-translate-y-1 shadow-xl hover:shadow-cyan-500/10"
+            class="group relative flex flex-col items-center gap-4 p-6 bg-white/5 border border-white/10 rounded-3xl hover:bg-white/10 hover:border-cyan-500 transition-transform duration-300 hover:-translate-y-1 will-change-transform shadow-xl hover:shadow-cyan-500/10"
             href={`tel:${phone}`}
             data-i18n-title="phone.tooltip"
             title={`Llamar a ${name}`}
@@ -108,14 +108,14 @@ const SOCIAL_ICONS: Record<string, any> = {
           .map(({ network, url }) => {
             const Icon = SOCIAL_ICONS[network];
             return (
-              <a
-                class="group relative flex flex-col items-center gap-4 p-6 bg-white/5 border border-white/10 rounded-3xl hover:bg-white/10 hover:border-cyan-500 transition-all duration-300 hover:-translate-y-1 shadow-xl hover:shadow-cyan-500/10"
-                href={`${url}`}
-                title={`Perfil de ${network}`}
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <div class="p-3 bg-cyan-500/10 rounded-2xl group-hover:scale-110 transition-transform duration-300">
+                <a
+                  class="group relative flex flex-col items-center gap-4 p-6 bg-white/5 border border-white/10 rounded-3xl hover:bg-white/10 hover:border-cyan-500 transition-transform duration-300 hover:-translate-y-1 will-change-transform shadow-xl hover:shadow-cyan-500/10"
+                  href={`${url}`}
+                  title={`Perfil de ${network}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <div class="p-3 bg-cyan-500/10 rounded-2xl group-hover:scale-110 transition-transform duration-300 will-change-transform">
                   <Icon />
                 </div>
                 <span class="text-[10px] font-black uppercase tracking-[0.2em] text-gray-500 group-hover:text-cyan-400 transition-colors">{network}</span>
@@ -128,8 +128,8 @@ const SOCIAL_ICONS: Record<string, any> = {
     <!-- Apoyo y Donaciones -->
     <div class="w-full no-print">
       <div class="bg-gradient-to-br from-cyan-900/10 via-slate-900/40 to-blue-900/10 border border-white/5 rounded-[2.5rem] p-8 md:p-12 backdrop-blur-sm overflow-hidden relative group">
-        <div class="absolute -top-24 -right-24 w-64 h-64 bg-cyan-600/10 rounded-full blur-3xl group-hover:bg-cyan-600/20 transition-all duration-700"></div>
-        <div class="absolute -bottom-24 -left-24 w-64 h-64 bg-blue-600/10 rounded-full blur-3xl group-hover:bg-blue-600/20 transition-all duration-700"></div>
+        <div class="absolute -top-24 -right-24 w-64 h-64 bg-cyan-600/10 rounded-full blur-3xl group-hover:bg-cyan-600/20 transition-colors duration-700"></div>
+        <div class="absolute -bottom-24 -left-24 w-64 h-64 bg-blue-600/10 rounded-full blur-3xl group-hover:bg-blue-600/20 transition-colors duration-700"></div>
 
         <div class="relative z-10 text-center mb-12">
           <h3 class="text-xs font-black uppercase tracking-[0.4em] text-cyan-400 mb-3" data-i18n="contact.support.subtitle">Support my Work</h3>
@@ -139,7 +139,7 @@ const SOCIAL_ICONS: Record<string, any> = {
 
         <div class="grid grid-cols-1 md:grid-cols-2 gap-6 relative z-10">
           {accounts.map((account) => (
-            <div class="flex flex-col bg-black/40 border border-white/5 rounded-3xl p-6 hover:border-white/10 transition-all duration-300 group/card">
+            <div class="flex flex-col bg-black/40 border border-white/5 rounded-3xl p-6 hover:border-white/10 transition-colors duration-300 group/card">
               <div class="flex items-center gap-4 mb-6">
                 <div class="p-3 bg-white rounded-xl shadow-lg">
                    <ImageComponent
@@ -159,7 +159,7 @@ const SOCIAL_ICONS: Record<string, any> = {
                     href={account.link}
                     target="_blank"
                     rel="noopener noreferrer"
-                    class="flex items-center justify-center w-full py-4 bg-white text-black text-xs font-black uppercase tracking-widest rounded-2xl hover:bg-cyan-500 hover:text-white transition-all duration-300 shadow-xl"
+                    class="flex items-center justify-center w-full py-4 bg-white text-black text-xs font-black uppercase tracking-widest rounded-2xl hover:bg-cyan-500 hover:text-white transition-colors duration-300 shadow-xl"
                     data-i18n={account.i18nCta}
                   >
                     {account.cta}
