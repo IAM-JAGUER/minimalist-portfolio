@@ -83,7 +83,7 @@ const tags = Array.from(new Set(projects.flatMap((p) => p.highlights)));
     const words = document.querySelectorAll(".falling-word");
 
     words.forEach((word) => {
-      const el = /** @type {HTMLElement} */ (word);
+      const el = word as HTMLElement;
       const delay = Math.random() * 15;
       const leftPosition = Math.random() * 90 + 5;
       const size = 0.7 + Math.random() * 0.6;
