@@ -9,22 +9,27 @@ document.addEventListener("DOMContentLoaded", function () {
     const scrollDownBtn = document.getElementById("scroll-down");
     const navIndicator = document.getElementById("nav-indicator");
     const navLinks = document.querySelectorAll(".nav-link");
+    const navMenu = document.getElementById("menu");
 
     let sectionRects = [];
-    let navLinkRects = [];
 
     function cacheLayout() {
       sectionRects = Array.from(sections).map(s => ({
         id: s.getAttribute("id"),
         top: s.offsetTop
       })).sort((a, b) => a.top - b.top);
+    }
 
-      navLinkRects = Array.from(navLinks).map(l => ({
-        el: l,
-        href: l.getAttribute("href"),
-        width: l.offsetWidth,
-        left: l.offsetLeft
-      }));
+    function getNavLinkRect(href) {
+      if (!navMenu || !navIndicator) return null;
+      const link = navMenu.querySelector(`a[href="${href}"]`);
+      if (!link) return null;
+      const menuRect = navMenu.getBoundingClientRect();
+      const linkRect = link.getBoundingClientRect();
+      return {
+        width: linkRect.width,
+        left: linkRect.left - menuRect.left
+      };
     }
 
     function getCurrentSectionId(scrollY) {
@@ -40,7 +45,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
       if (currentSectionId && navIndicator) {
         const targetHref = "#" + currentSectionId;
-        const linkRect = navLinkRects.find(r => r.href === targetHref);
+        const linkRect = getNavLinkRect(targetHref);
         if (linkRect) {
           navIndicator.style.width = linkRect.width + "px";
           navIndicator.style.left = linkRect.left + "px";
@@ -50,8 +55,11 @@ document.addEventListener("DOMContentLoaded", function () {
             link.classList.remove("text-cyan-400", "scale-110");
             link.classList.add("text-gray-400");
           });
-          linkRect.el.classList.add("text-cyan-400", "scale-110");
-          linkRect.el.classList.remove("text-gray-400");
+          const activeLink = navMenu.querySelector(`a[href="${targetHref}"]`);
+          if (activeLink) {
+            activeLink.classList.add("text-cyan-400", "scale-110");
+            activeLink.classList.remove("text-gray-400");
+          }
         }
       } else if (navIndicator) {
         navIndicator.style.opacity = "0";
