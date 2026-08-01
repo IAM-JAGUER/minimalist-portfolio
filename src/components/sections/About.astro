@@ -26,6 +26,32 @@ const tags = Array.from(new Set(projects.flatMap((p) => p.highlights)));
       </ul>
     </div>
 
+    <div class="space-y-6">
+      <h3 class="text-xs font-black uppercase tracking-[0.3em] text-cyan-400 text-center" data-i18n="about.ai.title">
+        Flujo de trabajo con IA
+      </h3>
+
+      <p class="text-base text-gray-400 leading-relaxed font-medium text-center max-w-2xl mx-auto" data-i18n="about.ai.summary">
+        Integro IA en mi flujo diario como tecnología de trabajo: opencode como CLI agéntico dentro de mi IDE, con subagentes especializados en arquitectura, calidad, rendimiento, UX y producto, loops con criterios de salida y un harness de automejora. Cada cambio pasa por revisión y verificación humana antes de integrarse.
+      </p>
+
+      <ul class="flex flex-col gap-3 max-w-xl mx-auto">
+        {[
+          ["about.ai.item1","opencode: CLI agéntico integrado en mi IDE"],
+          ["about.ai.item2","Subagentes especializados en arquitectura, calidad, rendimiento y UX"],
+          ["about.ai.item3","Loops con criterios de salida y control de costos"],
+          ["about.ai.item4","Harness de automejora con verificación humana"],
+        ].map(([key, label]) => (
+          <li class="flex items-center gap-3 text-sm text-slate-300 leading-relaxed">
+            <span class="text-cyan-500 shrink-0">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
+            </span>
+            <span data-i18n={key}>{label}</span>
+          </li>
+        ))}
+      </ul>
+    </div>
+
     <!-- Banner para la animación de lluvia de palabras -->
     <div class="word-rain-banner mask-fade-y border-t border-b border-white/5">
       {tags.map((tag) => <span class="falling-word text-cyan-400 font-black uppercase tracking-[0.2em] pointer-events-none">{tag}</span>)}

@@ -1,12 +1,16 @@
 ---
+import { basics } from "@cv";
+const { name, image } = basics;
 ---
 
 <footer class="w-full bg-slate-950/60 backdrop-blur-xl border-t border-white/5 no-print">
   <div class="max-w-[800px] mx-auto flex flex-col items-center gap-6 pt-12 pb-12 px-6">
-    <div class="flex flex-col items-center leading-none">
-      <span class="text-2xl font-black tracking-tighter text-white">IAM</span>
-      <span class="text-[10px] uppercase font-bold tracking-[0.4em] text-cyan-500">Jaguer</span>
-    </div>
+    <a href="#section1" class="group flex items-center gap-3 transition-transform duration-700 ease-out hover:scale-110 hover:rotate-2 will-change-transform">
+      <div class="relative" style="filter:drop-shadow(var(--logo-glow));transition:filter 0.5s">
+        <div class="absolute -inset-2 bg-gradient-to-r from-cyan-600 to-blue-600 rounded-lg blur opacity-0 group-hover:opacity-40 transition-all duration-500" style="filter:drop-shadow(var(--logo-glow-hover))"></div>
+        <img src={image} alt={name} class="relative w-14 h-14 sm:w-16 sm:h-16 object-contain" />
+      </div>
+    </a>
     
     <p class="text-[10px] font-bold uppercase tracking-widest text-gray-500 text-center">
       &copy; {new Date().getFullYear()}

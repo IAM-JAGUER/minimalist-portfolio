@@ -5,8 +5,13 @@ interface Props {
 
 const { title } = Astro.props;
 
-import { basics } from "@cv";
+import { basics, skills } from "@cv";
 const { summary, name } = basics;
+
+const umamiUrl = import.meta.env.PUBLIC_UMAMI_URL;
+const umamiWebsiteId = import.meta.env.PUBLIC_UMAMI_WEBSITE_ID;
+
+const skillNames = skills ? skills.map(s => s.name) : [];
 ---
 
 <!doctype html>
@@ -53,8 +58,25 @@ const { summary, name } = basics;
       "image": "https://iamjaguer.netlify.app/logo.png",
       "jobTitle": "Desarrollador Fullstack",
       "description": summary,
+      "email": "mailto:jaguerx88@gmail.com",
+      "telephone": "(+57) 317-868-4451",
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Pitalito",
+        "addressRegion": "Huila",
+        "addressCountry": "CO"
+      },
+      "knowsAbout": skillNames,
+      "knowsLanguage": ["es", "en"],
       "sameAs": basics.profiles.map(p => p.url)
     })} />
+
+    <!-- Umami Analytics -->
+    {
+      umamiUrl && umamiWebsiteId && (
+        <script is:inline async src={`${umamiUrl}/script.js`} data-website-id={umamiWebsiteId}></script>
+      )
+    }
 
     <!-- FODM prevention: apply theme before first paint -->
     <script is:inline>

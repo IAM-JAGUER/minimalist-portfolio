@@ -3,30 +3,9 @@ import { basics } from "@cv";
 import Section from "@/components/Section.astro";
 import Mail from "@/icons/Mail.astro";
 import Phone from "@/icons/Phone.astro";
+import WhatsApp from "@/icons/WhatsApp.astro";
 import GitHub from "@/icons/GitHub.astro";
 import LinkedIn from "@/icons/LinkedIn.astro";
-import ImageComponent from "@/components/ImageComponent.astro";
-
-const accounts = [
-  {
-    name: "PayPal",
-    service: "PayPal",
-    link: "https://paypal.me/iamdev88",
-    cta: "Donar con PayPal",
-    i18nCta: "contact.donate.paypal",
-    description: "Pagos internacionales seguros",
-    i18nDesc: "contact.donate.paypal.desc"
-  },
-  {
-    name: "Nequi",
-    service: "Nequi",
-    qr: true,
-    cta: "Escanear QR Nequi",
-    i18nCta: "contact.donate.nequi",
-    description: "Transferencias rápidas (Colombia)",
-    i18nDesc: "contact.donate.nequi.desc"
-  },
-];
 
 import Twitch from "@/icons/Twitch.astro";
 import Youtube from "@/icons/Youtube.astro";
@@ -34,6 +13,9 @@ import TikTok from "@/icons/TikTok.astro";
 import Facebook from "@/icons/Facebook.astro";
 
 const { name, profiles, phone, email } = basics;
+
+const whatsappNumber = phone?.replace(/[^\d]/g, "").replace(/^\+/, "") || "";
+const whatsappUrl = whatsappNumber ? `https://wa.me/${whatsappNumber}` : "";
 
 const SOCIAL_ICONS: Record<string, any> = {
   GitHub,
@@ -125,63 +107,55 @@ const SOCIAL_ICONS: Record<string, any> = {
       }
     </div>
 
-    <!-- Apoyo y Donaciones -->
+    <!-- CTA de contratación -->
     <div class="w-full no-print">
       <div class="bg-gradient-to-br from-cyan-900/10 via-slate-900/40 to-blue-900/10 border border-white/5 rounded-[2.5rem] p-8 md:p-12 backdrop-blur-sm overflow-hidden relative group">
         <div class="absolute -top-24 -right-24 w-64 h-64 bg-cyan-600/10 rounded-full blur-3xl group-hover:bg-cyan-600/20 transition-colors duration-700"></div>
         <div class="absolute -bottom-24 -left-24 w-64 h-64 bg-blue-600/10 rounded-full blur-3xl group-hover:bg-blue-600/20 transition-colors duration-700"></div>
 
         <div class="relative z-10 text-center mb-12">
-          <h3 class="text-xs font-black uppercase tracking-[0.4em] text-cyan-400 mb-3" data-i18n="contact.support.subtitle">Support my Work</h3>
-          <p class="text-2xl md:text-3xl font-black text-white tracking-tighter mb-4" data-i18n="contact.support.title">¿Te gusta lo que hago?</p>
-          <p class="text-sm text-gray-400 font-medium max-w-md mx-auto leading-relaxed" data-i18n="contact.support.desc">Cada apoyo cuenta para seguir creando herramientas y contenido de calidad para la comunidad.</p>
+          <h3 class="text-xs font-black uppercase tracking-[0.4em] text-cyan-400 mb-3" data-i18n="contact.cta.subtitle">Disponible para proyectos freelance y colaboraciones</h3>
+          <p class="text-2xl md:text-3xl font-black text-white tracking-tighter mb-4" data-i18n="contact.cta.title">¿Buscas un desarrollador?</p>
+          <p class="text-sm text-gray-400 font-medium max-w-md mx-auto leading-relaxed" data-i18n="contact.cta.desc">Cuéntame tu proyecto y te respondo en menos de 24 horas.</p>
         </div>
 
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 relative z-10">
-          {accounts.map((account) => (
-            <div class="flex flex-col bg-black/40 border border-white/5 rounded-3xl p-6 hover:border-white/10 transition-colors duration-300 group/card">
-              <div class="flex items-center gap-4 mb-6">
-                <div class="p-3 bg-white rounded-xl shadow-lg">
-                   <ImageComponent
-                    classes="max-h-[24px] object-contain"
-                    imageName={account.service.toLowerCase().replace(" ", "_") + ".png"}
-                  />
-                </div>
-                <div class="text-left">
-                  <h4 class="text-white font-black tracking-tight text-lg leading-none mb-1">{account.name}</h4>
-                  <p class="text-[10px] text-gray-500 font-bold uppercase tracking-wider" data-i18n={account.i18nDesc}>{account.description}</p>
-                </div>
-              </div>
-
-              <div class="mt-auto">
-                {account.link ? (
-                  <a
-                    href={account.link}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    class="flex items-center justify-center w-full py-4 bg-white text-black text-xs font-black uppercase tracking-widest rounded-2xl hover:bg-cyan-500 hover:text-white transition-colors duration-300 shadow-xl"
-                    data-i18n={account.i18nCta}
-                  >
-                    {account.cta}
-                  </a>
-                ) : account.qr ? (
-                  <div class="space-y-4">
-                    <div class="bg-white p-4 rounded-2xl inline-block mx-auto group-hover/card:scale-105 transition-transform duration-500">
-                      <ImageComponent
-                        classes="max-w-[140px] mx-auto rounded-lg"
-                        imageName={account.service.toLowerCase().replace(" ", "_") + "qr.jpeg"}
-                      />
-                    </div>
-                    <p class="text-[10px] text-gray-500 font-bold uppercase tracking-widest" data-i18n={account.i18nCta}>{account.cta}</p>
-                  </div>
-                ) : null}
-              </div>
-            </div>
-          ))}
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 relative z-10">
+          {whatsappUrl && (
+            <a
+              href={whatsappUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="group flex flex-col items-center justify-center gap-3 w-full py-6 bg-[#25D366]/15 border border-[#25D366]/40 text-white text-xs font-black uppercase tracking-widest rounded-2xl hover:bg-[#25D366]/25 hover:border-[#25D366] transition-colors duration-300 shadow-xl"
+            >
+              <WhatsApp />
+              <span class="text-sm font-black normal-case tracking-normal" data-i18n="contact.cta.whatsapp">WhatsApp</span>
+              <span class="text-[10px] font-bold uppercase tracking-widest text-gray-400">{phone}</span>
+            </a>
+          )}
+          {email && (
+            <a
+              href={`mailto:${email}?subject=${encodeURIComponent("Propuesta de proyecto")}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="flex flex-col items-center justify-center gap-3 w-full py-6 bg-white text-black text-xs font-black uppercase tracking-widest rounded-2xl hover:bg-cyan-500 hover:text-white transition-colors duration-300 shadow-xl"
+            >
+              <span class="text-sm font-black normal-case tracking-normal" data-i18n="contact.cta.hire">Contratarme</span>
+              <span class="text-[10px] font-bold uppercase tracking-widest text-gray-500 group-hover:text-white" data-i18n="contact.cta.email">Escribir por correo</span>
+            </a>
+          )}
+          {phone && (
+            <a
+              href={`tel:${phone}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="flex flex-col items-center justify-center gap-3 w-full py-6 bg-black/40 border border-white/10 text-white text-xs font-black uppercase tracking-widest rounded-2xl hover:border-cyan-500 hover:bg-cyan-600/20 transition-colors duration-300 shadow-xl"
+            >
+              <span class="text-sm font-black normal-case tracking-normal" data-i18n="contact.cta.phone">Llamar</span>
+              <span class="text-[10px] font-bold uppercase tracking-widest text-gray-500">{phone}</span>
+            </a>
+          )}
         </div>
       </div>
     </div>
   </div>
 </Section>
-
-

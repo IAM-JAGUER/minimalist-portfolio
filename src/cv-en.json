@@ -21,6 +21,11 @@
         "network": "GitHub",
         "username": "JAGUER-DEV",
         "url": "https://github.com/IAM-JAGUER/"
+      },
+      {
+        "network": "LinkedIn",
+        "username": "iam-jaguer",
+        "url": "https://www.linkedin.com/in/iam-jaguer/"
       }
     ]
   },
@@ -160,27 +165,6 @@
       ]
     },
     {
-      "name": "Comunidad Raid Dominion Tools",
-      "image": "rdtCommunity.avif",
-      "url": "https://raid-dominion.netlify.app/",
-      "description": "Complementary web portal for WoW community with Discord integration, Twitch streaming, YouTube content, and guild management tools.",
-      "highlights": [
-        "Web Portal",
-        "Discord",
-        "Twitch",
-        "YouTube"
-      ]
-    },
-    {
-      "name": "Addon Raid Dominion Tools",
-      "image": "rdtAddon.png",
-      "url": "https://github.com/IAM-DEV88/RaidDominion",
-      "description": "LUA addon for World of Warcraft 3.3.5a enhancing gameplay with advanced UI customizations, web portal integration, and routine automation.",
-      "highlights": [
-        "LUA"
-      ]
-    },
-    {
       "name": "Agenda Contable",
       "image": "agenda.png",
       "url": "https://github.com/IAM-DEV88/agendareact",
@@ -221,6 +205,27 @@
         "CSS",
         "JSON",
         "CRUD"
+      ]
+    },
+    {
+      "name": "Comunidad Raid Dominion Tools",
+      "image": "rdtCommunity.avif",
+      "url": "https://raid-dominion.netlify.app/",
+      "description": "Complementary web portal for WoW community with Discord integration, Twitch streaming, YouTube content, and guild management tools.",
+      "highlights": [
+        "Web Portal",
+        "Discord",
+        "Twitch",
+        "YouTube"
+      ]
+    },
+    {
+      "name": "Addon Raid Dominion Tools",
+      "image": "rdtAddon.png",
+      "url": "https://github.com/IAM-DEV88/RaidDominion",
+      "description": "LUA addon for World of Warcraft 3.3.5a enhancing gameplay with advanced UI customizations, web portal integration, and routine automation.",
+      "highlights": [
+        "LUA"
       ]
     },
     {
